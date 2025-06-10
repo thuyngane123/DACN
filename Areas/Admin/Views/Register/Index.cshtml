@@ -1,0 +1,47 @@
+﻿@model DACN.Models.Account
+@using DACN.Views.Utilities;
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card">
+            <div class="card-header text-center">
+                <div class="card-title">Đăng Ký</div>
+            </div>
+
+            <form method="post" asp-action="Index" asp-controller="Register">
+                <div class="card-body">
+                    @if (!string.IsNullOrEmpty(Function._MessageEmail))
+
+                    {
+                        <div class="alert alert-danger text-center">@Function._MessageEmail</div>
+                    }
+
+                    <div class="form-group">
+                        <label asp-for="Username">Họ tên</label>
+                        <input asp-for="Username" class=" form-control" placeholder="Nhập họ tên" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Email">Email</label>
+                        <input asp-for="Email" class="form-control" placeholder="Nhập email" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Password">Mật khẩu</label>
+                        <input asp-for="Password" class="form-control" placeholder="Nhập mật khẩu" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Phone">Số điện thoại</label>
+                        <input asp-for="Phone" class="form-control" placeholder="Nhập số điện thoại" />
+                    </div>
+                </div>
+
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">Đăng Ký</button>
+                    <a href="/Admin/Login" class="btn btn-danger">Huỷ</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

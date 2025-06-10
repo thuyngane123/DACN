@@ -1,0 +1,76 @@
+﻿@model DACN.Models.Blog
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Bài viết</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Thêm bài viết</div>
+                    </div>
+                    <form asp-action="Create">
+                        <div class="card-body">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Title" class="control-label">Tiêu đề</label>
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                          
+                            
+                            <div class="form-group">
+                                <label asp-for="Image" class="control-label">Ảnh</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <button type="button" class="btn btn-success" onclick="openDialog()">Choose a picture</button>
+                                    </div>
+                                    <input type="text" class="form-control" id="file-input" asp-for="Image" aria-describedby="button-addon2">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label">Mô Tả</label>
+                                <textarea asp-for="Description" class="form-control" style="width: 100%; height: 1000px;"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Detail" class="control-label">Chi tiết</label>
+                                <textarea asp-for="Detail" class="form-control" style="width: 100%; height: 1000px;"></textarea>
+                                <span asp-validation-for="Detail" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CreatedBy" class="control-label">Tác Giả</label>
+                                <textarea asp-for="CreatedBy" class="form-control" style="width: 100%; height: 1000px;"></textarea>
+                                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+                            </div>
+                            <div class="form-group form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="IsActive" /> Hiển thị
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                                <a asp-action="Index" class="btn btn-warning">Quay Lại</a>
+                            </div>
+                            <!-- /.card-body -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

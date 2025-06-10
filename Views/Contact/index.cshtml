@@ -1,0 +1,129 @@
+﻿<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumbs-area position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="breadcrumb-content position-relative section-content">
+                    <h3 class="title-3">Liên Hệ</h3>
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li>Liên Hệ</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- Contact Us Area Start Here -->
+<div class="contact-us-area mt-no-text">
+    <div class="container custom-area">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-custom">
+                <div class="contact-info-item">
+                    <div class="con-info-icon">
+                        <i class="lnr lnr-map-marker"></i>
+                    </div>
+                    <div class="con-info-txt">
+                        <h4>Vị trí của chúng tôi</h4>
+                        <p>(+84) 123 456 789 / (+84) 123 456 789 info@example.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-custom">
+                <div class="contact-info-item">
+                    <div class="con-info-icon">
+                        <i class="lnr lnr-smartphone"></i>
+                    </div>
+                    <div class="con-info-txt">
+                        <h4>Liên hệ với chúng tôi bất cứ lúc nào</h4>
+                        <p>SĐT: 012 345 678<br>Email:info@example.com </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-custom text-align-center">
+                <div class="contact-info-item">
+                    <div class="con-info-icon">
+                        <i class="lnr lnr-envelope"></i>
+                    </div>
+                    <div class="con-info-txt">
+                        <h4>Hỗ trợ</h4>
+                        <p>Hỗ trợ 24/7@example.com <br> info@example.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-custom">
+                <form method="post" action="/Contact/Create" id="contactForm" accept-charset="UTF-8" class="contact-form">
+                    <div class="comment-box mt-5">
+                        <h5 class="text-uppercase">Liên Hệ</h5>
+                        <div class="row mt-3">
+                            <div class="col-md-6 col-custom">
+                                <div class="input-item mb-4">
+                                    <input class="border-0 rounded-0 w-100 input-area name gray-bg" type="text" name="con_name" id="c_name" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-custom">
+                                <div class="input-item mb-4">
+                                    <input class="border-0 rounded-0 w-100 input-area email gray-bg" type="email" name="con_email" id="c_email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col-12 col-custom">
+                                <div class="input-item mb-4">
+                                    <input class="border-0 rounded-0 w-100 input-area email gray-bg" type="text" name="con_content" id="c_phone" placeholder="Phone">
+                                </div>
+                            </div>
+                            <div class="col-12 col-custom">
+                                <div class="input-item mb-4">
+                                    <textarea cols="30" rows="5" class="border-0 rounded-0 w-100 custom-textarea input-area gray-bg" name="con_message" id="c_message" placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12 col-custom mt-40">
+                                <button type="submit" id="submit" name="submit" class="btn flosun-button secondary-btn theme-color rounded-0">Gửi thông tin</button>
+                            </div>
+                            <p class="col-8 col-custom form-message mb-0"></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $("#contactForm").submit(function(e) {
+                e.preventDefault();
+                var name = $("#c_name").val();
+                var phone = $("#c_phone").val();
+                var email = $("#c_email").val();
+                var message = $("#c_message").val();
+
+                $.ajax({
+                    url: "/Contact/Create",
+                    type: "POST",
+                    data: {
+                        name: name,
+                        phone: phone,
+                        email: email,
+                        message: message
+                    },
+                    success: function(result) {
+                        if (result.status) {
+                            alert("Thông tin đã được gửi thành công!");
+                        } else {
+                            alert("Có lỗi xảy ra. Vui lòng thử lại.");
+                        }
+                        $("#c_name").val("");
+                        $("#c_phone").val("");
+                        $("#c_email").val("");
+                        $("#c_message").val("");
+                    },
+
+                });
+            });
+        });
+    </script>
+}

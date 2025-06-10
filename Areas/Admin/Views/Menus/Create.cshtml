@@ -1,0 +1,76 @@
+﻿@model DACN.Models.Menu
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+   <div class="container">
+          <div class="page-inner">
+            <div class="page-header">
+              <h3 class="fw-bold mb-3">Menu</h3>
+              <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="icon-home"></i>
+                  </a>
+                </li>
+                
+              </ul>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="card-title">Thêm menu</div>
+                  </div>
+                    <form asp-action="Create">
+                        <div class="card-body">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Title" class="control-label">Tiêu đề</label>
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Alias" class="control-label"></label>
+                                <input asp-for="Alias" class="form-control" />
+                                <span asp-validation-for="Alias" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label">Mô tả</label>
+                                <input asp-for="Description" class="form-control" />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Levels" class="control-label">Mức</label>
+                                <input asp-for="Levels" class="form-control" />
+                                <span asp-validation-for="Levels" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ParentId" class="control-label">Menu cha</label>
+                                <input asp-for="ParentId" class="form-control" />
+                                <span asp-validation-for="ParentId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Position" class="control-label">Vị trí</label>
+                                <input asp-for="Position" class="form-control" />
+                                <span asp-validation-for="Position" class="text-danger"></span>
+                            </div>
+                            <div class="form-group form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" asp-for="IsActive" /> Hiển thị
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                                <a asp-action="Index" class="btn btn-warning">Quay Lại</a>
+                            </div>
+                            <!-- /.card-body -->
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+  

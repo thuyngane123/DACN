@@ -1,0 +1,68 @@
+﻿@model IEnumerable<DACN.Models.Car>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        string url = $"/product/{item.Alias}-{item.CarId}.html";
+        <div class="col-md-3 mb-4">
+            <!--Single Product Start-->
+            <div class="single-product position-relative mb-30">
+                <div class="product-image">
+                    <a class="d-block" href="@url">
+                        <img src="@item.Image" alt="" class="product-image-1 w-100">
+                        <img src="@item.Image" alt="" class="product-image-2 position-absolute w-100">
+                    </a>
+                    @if (item.IsSale)
+                    {
+                        <span class="onsale">Giảm!</span>
+                    }
+                    <div class="add-action d-flex flex-column position-absolute">
+                        <a href="compare.html" title="Compare">
+                            <i class="lnr lnr-sync" data-toggle="tooltip" data-placement="left" title="Compare"></i>
+                        </a>
+                        <a href="wishlist.html" title="Add To Wishlist">
+                            <i class="lnr lnr-heart" data-toggle="tooltip" data-placement="left" title="Wishlist"></i>
+                        </a>
+                        <a href="#exampleModalCenter" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                            <i class="lnr lnr-eye" data-toggle="tooltip" data-placement="left" title="Quick View"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <div class="product-title">
+                        <h4 class="title-2"> <a href="@url">@item.CarName</a></h4>
+                    </div>
+                    <div class="product-rating">
+                        @for (int i = 0; i <= 5; i++)
+                        {
+                            if (i < item.Rate)
+                            {
+                                <i class="fa fa-star"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-star-o"></i>
+                            }
+                        }
+
+                    </div>
+                    <div class="price-box">
+                        @if (!item.SalePrice.HasValue || item.SalePrice == 0)
+                        {
+                            <span class="regular-price ">@(item.Price?.ToString("N0") ?? "Liên hệ") đ/Ngày</span>
+                        }
+                        else
+                        {
+                            <span class="regular-price ">@(item.SalePrice?.ToString("N0") ?? "Liên hệ") đ/Ngày</span>
+                            <span class="old-price"><del>@(item.Price?.ToString("N0") ?? "Liên hệ") đ</del></span>
+                        }
+
+
+                    </div>
+                    <a href="cart.html" class="btn product-cart">Thêm vào giỏ hàng</a>
+                </div>
+            </div>
+            <!--Single Product End-->
+
+        </div>
+    }
+</div>

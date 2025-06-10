@@ -1,0 +1,154 @@
+﻿@model DACN.Models.Car
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Sản phẩm</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Thêm sản phẩm</div>
+                    </div>
+                    <form asp-action="Create">
+                        <div class="card-body">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="CarName"></label>
+                            <input asp-for="CarName" class="form-control" />
+                            <span asp-validation-for="CarName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Seat" class="control-label">Số Ghế</label>
+                            <input asp-for="Seat" class="form-control" />
+                            <span asp-validation-for="Seat" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LicensePlate" class="control-label">Biển số</label>
+                            <input asp-for="LicensePlate" class="form-control" />
+                            <span asp-validation-for="LicensePlate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Price" class="control-label">Giá</label>
+                            <input asp-for="Price" class="form-control" type="number" step="0.01" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="SalePrice" class="control-label">Giá khuyến mãi</label>
+                            <input asp-for="SalePrice" class="form-control" type="number" step="0.01" />
+                            <span asp-validation-for="SalePrice" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Color" class="control-label">Màu sắc</label>
+                            <input asp-for="Color" class="form-control" />
+                            <span asp-validation-for="Color" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Model" class="control-label">Model</label>
+                            <input asp-for="Model" class="form-control" />
+                            <span asp-validation-for="Model" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Rate" class="control-label">Đánh giá</label>
+                            <input asp-for="Rate" class="form-control" type="number" step="0.1" />
+                            <span asp-validation-for="Rate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="CarBrand" class="control-label">Thương hiệu</label>
+                            <input asp-for="CarBrand" class="form-control" />
+                            <span asp-validation-for="CarBrand" class="text-danger"></span>
+                        </div>
+                            <div class="form-group">
+                                <label asp-for="Image">Ảnh</label>
+                                <div class="input-group mb-3">
+                                    <button class="btn btn-primary" type="button" onclick="openDialog()"
+                                            id="button-addon1">
+                                        Chọn ảnh
+                                    </button>
+                                    <input asp-for="Image" type="text" class="form-control" id="file_input"
+                                           aria-label="Example text with button addon"
+                                           aria-describedby="button-addon1">
+                                </div>
+                                <span asp-validation-for="Image" class="text-danger"></span>
+
+                            </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">Đang giảm giá
+                                <input class="form-check-input" asp-for="IsSale" type="checkbox" />
+                            </label>
+                        </div>
+
+                        <div class="form-group form-check">
+                            <label class="form-check-label">Hiển thị
+                                <input class="form-check-input" asp-for="IsActive" type="checkbox" />
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Details" class="control-label">Chi tiết</label>
+                            <textarea asp-for="Details" class="form-control"></textarea>
+                            <span asp-validation-for="Details" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Descriptions" class="control-label">Mô tả</label>
+                            <textarea asp-for="Descriptions" class="form-control"></textarea>
+                            <span asp-validation-for="Descriptions" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                             <label asp-for="Type">Dòng xe</label>
+                              <select asp-items="ViewBag.carType" class="form-select" id="basicSelect">
+                                    <option selected></option>
+                              </select>
+                              <span asp-validation-for="Type" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Alias" class="control-label">Alias</label>
+                            <input asp-for="Alias" class="form-control" readonly />
+                            <span asp-validation-for="Alias" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Thêm</button>
+                            <a asp-action="Index" class="btn btn-warning">Quay lại</a>
+                        </div>
+                    </div>
+                </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    var summernote = new DACN.Areas.Admin.Models.SummerNote("#Details");
+    <partial name="_SummerNote" model="summernote" />
+}
+<script>
+    function openDialog() {
+        const win = window.open('/admin/file-manager', 'FileManager', 'width=900,height=600');
+
+        window.SetUrl = function(url) {
+            document.getElementById('file_input').value = url;
+        };
+    }
+</script>

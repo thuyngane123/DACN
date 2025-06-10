@@ -1,0 +1,256 @@
+﻿
+@{
+
+    List<Car> productRelated = ViewBag.productRelated;
+    List<CarType> categories = ViewBag.categories;
+
+}
+<div class="breadcrumbs-area position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="breadcrumb-content position-relative section-content">
+                    <h3 class="title-3">Xe</h3>
+                    <ul>
+                        <li><a href="index.html">Trang chủ</a></li>
+                        <li>Xe</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- Shop Main Area Start Here -->
+<div class="shop-main-area">
+    <div class="container container-default custom-area">
+        <div class="row flex-row-reverse">
+            <div class="col-lg-9 col-12 col-custom widget-mt">
+                <!--shop toolbar start-->
+                <div class="shop_toolbar_wrapper mb-30">
+                    <div class="shop_toolbar_btn">
+                        <button data-role="grid_3" type="button" class="active btn-grid-3" title="Grid"><i class="fa fa-th"></i></button>
+                        <button data-role="grid_list" type="button" class="btn-list" title="List"><i class="fa fa-th-list"></i></button>
+                    </div>
+                    <div class="shop-select">
+                        <form class="d-flex flex-column w-100" action="#">
+                            <div class="form-group">
+                                <select class="form-control nice-select w-100">
+                                    <option selected value="1">Tất cả</option>
+                                   
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--shop toolbar end-->
+                <!-- Shop Wrapper Start -->
+                <div class="row shop_wrapper grid_3">
+                    @foreach (var item in productRelated)
+
+                    {
+
+                        string url = $"/product/{item.Alias}-{item.CarId}.html";
+                        <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area">
+                            <div class="product-item">
+                                <div class="single-product position-relative mr-0 ml-0">
+                                    <div class="product-image">
+                                        <a class="d-block" href="@url">
+                                            <img src="@item.Image" alt="" class="product-image-1 w-100">
+                                            <img src="@item.Image" alt="" class="product-image-2 position-absolute w-100">
+                                        </a>
+                                        @if (item.IsSale)
+
+                                        {
+                                            <span class="onsale">Giảm!</span>
+                                        }
+                                        <div class="add-action d-flex flex-column position-absolute">
+                                            <a href="compare.html" title="Compare">
+                                                <i class="lnr lnr-sync" data-toggle="tooltip" data-placement="left" title="Compare"></i>
+                                            </a>
+                                            <a href="wishlist.html" title="Add To Wishlist">
+                                                <i class="lnr lnr-heart" data-toggle="tooltip" data-placement="left" title="Wishlist"></i>
+                                            </a>
+                                            <a href="#exampleModalCenter" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                                                <i class="lnr lnr-eye" data-toggle="tooltip" data-placement="left" title="Quick View"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="product-content">
+                                        <div class="product-title">
+                                            <h4 class="title-2"> <a href="@url">@item.CarName</a></h4>
+                                        </div>
+                                        <div class="product-rating">
+                                            @for (int i = 0; i <= 5; i++)
+                                            {
+                                                if (i < item.Rate)
+                                                {
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-star-o"></i>
+                                                }
+                                            }
+                                        </div>
+                                        <div class="price-box">
+                                            @if (!item.SalePrice.HasValue || item.SalePrice == 0)
+
+                                            {
+                                                <span class="regular-price ">@(item.Price?.ToString("N0") ?? "Liên hệ") đ/Ngày</span>
+                                            }
+
+                                            else
+
+                                            {
+                                                <span class="regular-price ">@(item.SalePrice?.ToString("N0") ?? "Liên hệ") đ/Ngày</span>
+                                                <span class="old-price"><del>@(item.Price?.ToString("N0") ?? "Liên hệ") đ</del></span>
+                                            }
+                                        </div>
+                                        <a href="cart.html" class="btn product-cart">Thêm vào giỏ</a>
+                                    </div>
+                                    <div class="product-content-listview">
+                                        <div class="product-title">
+                                            <h4 class="title-2"> <a href="product-details.html">@item.CarName</a></h4>
+                                        </div>
+                                        <div class="product-rating">
+                                            @for (int i = 0; i <= 5; i++)
+                                            {
+                                                if (i < item.Rate)
+                                                {
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-star-o"></i>
+                                                }
+                                            }
+                                        </div>
+                                        <div class="price-box">
+                                            @if (!item.SalePrice.HasValue || item.SalePrice == 0)
+
+                                            {
+                                                <span class="regular-price ">@(item.Price?.ToString("N0") ?? "Liên hệ") đ/Ngày</span>
+                                            }
+
+                                            else
+
+                                            {
+                                                <span class="regular-price ">@(item.SalePrice?.ToString("N0") ?? "Liên hệ") đ/Ngày</span>
+                                                <span class="old-price"><del>@(item.Price?.ToString("N0") ?? "Liên hệ") đ</del></span>
+                                            }
+                                        </div>
+                                        <p class="desc-content">@item.Details</p>
+                                        <div class="button-listview">
+                                            <a href="cart.html" class="btn product-cart button-icon flosun-button dark-btn" data-toggle="tooltip" data-placement="top" title="Add to Cart"> <span>Thêm vào giỏ</span> </a>
+                                            <a class="list-icon" href="compare.html" title="Compare">
+                                                <i class="lnr lnr-sync" data-toggle="tooltip" data-placement="top" title="Compare"></i>
+                                            </a>
+                                            <a class="list-icon" href="wishlist.html" title="Add To Wishlist">
+                                                <i class="lnr lnr-heart" data-toggle="tooltip" data-placement="top" title="Wishlist"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+                <!-- Shop Wrapper End -->
+                <!-- Bottom Toolbar Start -->
+                <div class="row">
+                    <div class="col-sm-12 col-custom">
+                        <div class="toolbar-bottom">
+                            <div class="pagination">
+                                <ul>
+                                    <li class="current">1</li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li class="next"><a href="#">next</a></li>
+                                    <li><a href="#">&gt;&gt;</a></li>
+                                </ul>
+                            </div>
+                            <p class="desc-content text-center text-sm-right mb-0">Showing 1 - 12 of 34 result</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bottom Toolbar End -->
+            </div>
+            <div class="col-lg-3 col-12 col-custom">
+                <!-- Sidebar Widget Start -->
+                <aside class="sidebar_widget widget-mt">
+                    <div class="widget_inner">
+                        <div class="widget-list widget-mb-1">
+                            <h3 class="widget-title">Tìm kiếm</h3>
+                            <div class="search-box">
+                                <div class="input-group">
+                                    <input type="text" id="searchInput" class="form-control" placeholder="Search Our Store" aria-label="Search Our Store">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" id="searchButton" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    <div class="widget-list widget-mb-1">
+                        <h3 class="widget-title">Hạng xe</h3>
+                        <div class="sidebar-body">
+                            <ul class="sidebar-list">
+                                <li><a asp-controller="Product" asp-action="Index">Tất cả xe</a></li>
+                                @foreach (var item in categories)
+
+                                {
+                                    <li><a href="/Product/Index?TypeId=@item.TypeId">@item.CarTypeName</a></li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+
+                        <div class="widget-list widget-mb-2">
+                            <h3 class="widget-title">Màu sắc</h3>
+                            <div class="sidebar-body">
+                                <ul class="checkbox-container categories-list">
+                                    <li>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck12">
+                                            <label class="custom-control-label" for="customCheck12">Đen (20)</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck13">
+                                            <label class="custom-control-label" for="customCheck13">Đỏ (6)</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck14">
+                                            <label class="custom-control-label" for="customCheck14">Xanh (8)</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck11">
+                                            <label class="custom-control-label" for="customCheck11">Vàng (5)</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck15">
+                                            <label class="custom-control-label" for="customCheck15">Hồng (4)</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <!-- Sidebar Widget End -->
+            </div>
+        </div>
+    </div>
+</div>

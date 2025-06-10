@@ -1,0 +1,10 @@
+﻿@model IEnumerable<DACN.Models.Menu>
+
+@foreach (var item in Model.Where(i => i.Levels == 1))
+{
+    <li class="nav">
+        <a class="active" href="/@item.Alias" style="font-size: 16px;">
+            @item.Title
+        </a>
+    </li>
+}
